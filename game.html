@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapMystery - Guess the Location!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+
+        <!--sidebar-->
+        <div class="location-sidebar">
+            <p>HINTS</p>
+            <button>USA</button>
+            <button>FRANCE</button>
+            <button>INDIA</button>
+            <button>CHINA</button>
+            <button>EGYPT</button>
+        </div>
+
+        <!-- Game -->
+        <div class="game-content">
+            <h1>🌍 MapMystery 🌍</h1>
+            <div class="image-container">
+                <iframe id="mapFrame" src="about:blank"></iframe>
+            </div>
+            <div class="controls">
+                <button id="displayRandom" onclick="displayLocation()">New Location</button>
+                <input class="user-choice" id="userChoice" type="text" placeholder="Take a guess...">
+                <button id="checkAnswer" onclick="checkUser()">Check</button>
+            </div>
+            <p id="locationDisplay">Guess the location!</p>
+        </div>
+
+        <!-- sidebar -->
+        <div class="location-sidebar">
+            <p>HINTS</p>
+            <button>ITALY</button>
+            <button>AUSTRALIA</button>
+            <button>SPAIN</button>
+            <button>GREECE</button>
+            <button>ENGLAND</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
