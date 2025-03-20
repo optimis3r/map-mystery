@@ -21,18 +21,23 @@ function getRandomLocation() {
     return { key: randomKey, url: locations[randomKey] };
 }
 
+// Reset User's Input
+function resetUserInput() {
+    document.getElementById("userChoice").value = ""; // Clear the input field
+}
+
 // Display Location
 function displayLocation() {
     currentLocation = getRandomLocation();
     document.getElementById("mapFrame").src = currentLocation.url;
-    document.getElementById("userChoice").value = "";
+    resetUserInput(); // Reset the input field when a new location is displayed
 }
 
 // Verify User's Answer
 function checkUser() {
     const userInput = document.getElementById("userChoice").value.trim().toLowerCase();
-    alert(userInput === currentLocation.key ? " Great job! You got it right! " : ` Oops! The correct answer was ${currentLocation.key.toUpperCase()}.`);
-    document.getElementById("userChoice").value = "";
+    alert(userInput === currentLocation.key ? "Great job! You got it right!" : `Oops! The correct answer was ${currentLocation.key.toUpperCase()}.`);
+    resetUserInput(); // Reset the input field after checking the answer
 }
 
 // Load a location on boot of page
