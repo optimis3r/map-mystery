@@ -25,14 +25,14 @@ function getRandomLocation() {
 function displayLocation() {
     currentLocation = getRandomLocation();
     document.getElementById("mapFrame").src = currentLocation.url;
-    document.getElementById("userChoice").innerHTML = "";
+    document.getElementById("userChoice").value = "";
 }
 
 // Verify User's Answer
 function checkUser() {
     const userInput = document.getElementById("userChoice").value.trim().toLowerCase();
     alert(userInput === currentLocation.key ? " Great job! You got it right! " : ` Oops! The correct answer was ${currentLocation.key.toUpperCase()}.`);
-    document.getElementById("userChoice").innerHTML = "";
+    document.getElementById("userChoice").value = "";
 }
 
 // Load a location on boot of page
