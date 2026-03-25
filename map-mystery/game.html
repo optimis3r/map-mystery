@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapMystery — Guess the Location</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body class="game-page">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <header class="hud">
+        <div class="hud-left">
+            <a href="index.html" class="back-link">⟵ Retreat</a>
+            <span class="hud-brand">Map<span>Mystery</span></span>
+            <span class="mode-badge" id="modeBadge">—</span>
+        </div>
+        <div class="hud-center">
+            <div class="hud-stat">
+                <span class="hud-label">Round</span>
+                <span class="hud-val" id="roundDisplay">1/5</span>
+            </div>
+            <div class="hud-pip">✦</div>
+            <div class="hud-stat">
+                <span class="hud-label">Score</span>
+                <span class="hud-val" id="scoreDisplay">0</span>
+            </div>
+            <div class="hud-pip">✦</div>
+            <div class="hud-stat">
+                <span class="hud-label">Streak</span>
+                <span class="hud-val streak-val" id="streakDisplay">0</span>
+            </div>
+        </div>
+        <div class="hud-right">
+            <div class="lives">
+                <span class="life">♥</span>
+                <span class="life">♥</span>
+                <span class="life">♥</span>
+            </div>
+            <div class="timer-wrap">
+                <svg class="timer-svg" viewBox="0 0 38 38">
+                    <circle class="t-bg" cx="19" cy="19" r="16" />
+                    <circle class="t-fill" cx="19" cy="19" r="16" id="timerArc" />
+                </svg>
+                <span class="timer-num" id="timerNum">30</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="game-body">
+        <div class="map-zone">
+            <div class="map-blocker"></div>
+            <div class="map-vignette"></div>
+            <iframe id="mapFrame" src="about:blank" allowfullscreen></iframe>
+            <div class="live-tag"><span class="live-dot"></span>STREET VIEW</div>
+        </div>
+        <aside class="side-panel">
+
+            <div class="panel-block">
+                <p class="panel-title" id="panelTitle">Where in the world?</p>
+                <p class="panel-desc" id="panelDesc">Observe your surroundings.</p>
+            </div>
+
+            <div class="panel-block hard-note" id="hardNote" style="display:none">
+                <span class="skull">☠</span>
+                <p>No hints in Wraith mode.<br>Read the terrain, signs, and architecture.</p>
+            </div>
+
+            <div id="hintsToggleWrap" style="display:none">
+                <button class="hints-toggle" onclick="toggleHints()">
+                    <span>Country Hints</span>
+                    <span id="hintsArrow">▼</span>
+                </button>
+                <div class="hints-drawer" id="hintsDrawer">
+                    <div class="hints-grid" id="hintsGrid"></div>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <p class="panel-label">YOUR ANSWER</p>
+                <div class="input-row">
+                    <input type="text" id="userChoice" class="guess-input" placeholder="Enter country…"
+                        autocomplete="off" spellcheck="false">
+                    <button class="confirm-btn" id="confirmBtn" onclick="checkUser()">⏎</button>
+                </div>
+                <p class="feedback" id="feedback"></p>
+            </div>
+
+            <div class="panel-block panel-actions">
+                <button class="skip-btn" id="skipBtn" onclick="skipRound()">Skip this location ↷</button>
+            </div>
+
+        </aside>
+    </div>
+
+    <div class="modal-bg" id="resultModal">
+        <div class="modal">
+            <div class="modal-top-bar" id="resultBar"></div>
+            <div class="modal-icon" id="resultIcon"></div>
+            <h2 class="modal-title" id="resultTitle"></h2>
+            <p class="modal-body" id="resultBody"></p>
+            <div class="modal-stats">
+                <div class="ms"><span id="ms-score">0</span><small>Score</small></div>
+                <div class="ms"><span id="ms-streak">0</span><small>Streak</small></div>
+                <div class="ms"><span id="ms-pts">+0</span><small>Earned</small></div>
+            </div>
+            <button class="modal-btn" id="nextBtn" onclick="nextRound()">Next Location →</button>
+        </div>
+    </div>
+
+    <div class="modal-bg" id="gameOverModal">
+        <div class="modal gameover-modal">
+            <div class="modal-top-bar" style="background:linear-gradient(90deg,var(--purple),var(--purple-dim))"></div>
+            <div class="modal-icon">🌍</div>
+            <h2 class="modal-title" id="goTitle">Expedition Over</h2>
+            <p class="modal-body" id="goBody"></p>
+            <div class="modal-stats big-stats">
+                <div class="ms">
+                    <span id="go-score">0</span>
+                    <small>Final Score</small>
+                </div>
+                <div class="ms">
+                    <span id="go-correct">0/5</span>
+                    <small>Correct</small>
+                </div>
+                <div class="ms">
+                    <span id="go-streak">0</span>
+                    <small>Best Streak</small>
+                </div>
+            </div>
+            <div class="go-btns">
+                <button class="modal-btn" onclick="restartGame()">Play Again</button>
+                <a class="modal-btn ghost-btn" href="index.html">Choose Mode</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
