@@ -1060,3 +1060,133 @@ body.game-page {
 .gameover-modal {
     max-width: 480px;
 }
+
+/* ROTATION OVERLAY */
+.rotate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--black);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.rotate-overlay.rotate-visible {
+    display: flex;
+}
+
+.rotate-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 32px;
+    max-width: 320px;
+    border: 1px solid var(--border-mid);
+    border-radius: 6px;
+    background: var(--black2);
+    position: relative;
+}
+
+.rotate-card::before,
+.rotate-card::after {
+    content: '✦';
+    position: absolute;
+    font-size: 0.6rem;
+    color: var(--border-hi);
+}
+
+.rotate-card::before {
+    top: 12px;
+    left: 14px;
+}
+
+.rotate-card::after {
+    bottom: 12px;
+    right: 14px;
+}
+
+.rotate-icon {
+    font-size: 3.5rem;
+    color: var(--purple);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(139, 68, 232, 0.35));
+    animation: rotatePhone 2.2s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes rotatePhone {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    30% {
+        transform: rotate(-90deg) scale(1.08);
+    }
+
+    60% {
+        transform: rotate(-90deg) scale(1.08);
+    }
+
+    90% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+.rotate-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.rotate-body {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-mid);
+    line-height: 1.65;
+    margin-bottom: 28px;
+}
+
+.rotate-dots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.rotate-dots span {
+    width: 5px;
+    height: 5px;
+    background: var(--purple-dim);
+    border-radius: 50%;
+    animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.rotate-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.rotate-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
